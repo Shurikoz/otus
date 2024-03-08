@@ -16,6 +16,8 @@ Route::post('register', [RegisterController::class, 'register']);
 
 Route::get('user/search', [UserController::class, 'search']);
 
+Route::get('/messenger/get', [MessengerController::class, 'getMessages']);
+
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('user', UserController::class)->only(['show']);
     Route::get('posts/feed', [PostController::class, 'index']);

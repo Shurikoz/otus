@@ -9,6 +9,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Tarantool\Client\Client;
 use Tarantool\Client\Schema\Criteria;
@@ -135,5 +137,20 @@ class MessengerController extends AppBaseController
         echo '================' . PHP_EOL;
         echo 'Время вставки данных: ' . round(microtime(true) - $timerInsert, 3) . 's' . PHP_EOL;
         echo '================' . PHP_EOL;
+    }
+
+    public function getMessages()
+    {
+        $url = 'http://127.0.0.1:8001/api/v2/messenger/get';
+        $response = Http::get($url);
+        Log::info('Отправлен запрос на адрес '. $url . ' ');
+
+        if (!$response->successful()) {
+            Log::info('Ошибка получения ответа от сервера');
+            return false;
+        }
+
+        Log::info('Ответ успешно получен');
+        return $response->json();
     }
 }

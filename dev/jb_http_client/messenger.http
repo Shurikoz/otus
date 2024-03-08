@@ -18,3 +18,8 @@ Authorization: {{authorization}}
 GET {{host}}{{apiUri}}/messenger/tarantool
 Accept: application/json
 Authorization: {{authorization}}
+
+###
+GET {{host}}{{apiUri}}/messenger/get
+Accept: application/json
+Authorization: {{authorization}}
